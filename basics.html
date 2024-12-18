@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christmas Society Website</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f0f0f0;
+            height: 100vh;
+            text-align: center;
+            flex-direction: column;
+        }
+
+        
+        .login-form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"], input[type="password"] {
+            width: 100%;
+            padding: 8px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        input[type="submit"], input[type="reset"] {
+            width: 48%;
+            padding: 10px;
+            font-size: 14px;
+            border: none;
+            border-radius: 4px;
+            background-color: #007bff;
+            color: white;
+            cursor: pointer;
+        }
+
+        input[type="reset"] {
+            background-color: #ccc;
+        }
+
+        input[type="submit"]:hover, input[type="reset"]:hover {
+            opacity: 0.9;
+        }
+
+        
+        .logged-in {
+        display: none; 
+        width: 100%;
+        height: 100%;
+        max-width: 800px;
+        text-align: left;
+        }
+
+        .image-div {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .funny-text {
+            color: red;
+            font-style: italic;
+        }
+
+        a {
+            color: blue;
+            text-decoration: underline;
+        }
+
+        .story-section, .comment-section {
+            margin-top: 30px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            font-size: 14px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            height: 100px;
+        }
+
+        button {
+            padding: 10px 20px;
+            font-size: 14px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+
+    
+    <div class="login-form" id="loginForm">
+        <h1>Christmas Society Website</h1>
+        <p><strong>This website where users are provided with a specific prompt and write about it, allowing others to read and comment on the passages written by other users.</strong></p>
+
+        <form id="loginFormSubmit">
+            <div class="form-group">
+                <label for="username">Username or Email:</label>
+                <input type="text" id="username" name="username" placeholder="Enter your username or email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" placeholder="Enter your password" required>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Login">
+                <input type="reset" value="Clear">
+            </div>
+        </form>
+    </div>
+
+    
+    <div class="logged-in" id="loggedInContent">
+        <h1>Welcome to the Christmas Society Website!</h1>
+        <p><strong>This website is sharing your own story for Christmas!</strong></p>
+        <p>May you have a warm and joyful Christmas, and may love and happiness always be with you, <span class="funny-text"></span></p>
+        <h4><span class="span-text">May the Christmas bells bring you hope and blessings, and may everything go smoothly for you in the new year</span></h4>
+        <h5>Christmas is a holiday for the soul. May your heart be filled with warmth and peace<br> Happy Christmas<br> Happy Christmas</h5>
+
+        <div class="story-section">
+            <h2>Share Your Christmas Story!</h2>
+            <textarea id="storyInput" placeholder="Write your Christmas story here..."></textarea>
+            <button onclick="submitStory()">Submit Your Story</button>
+        </div>
+
+        <div class="story-display">
+            <h3>Other User's Stories:</h3>
+            <div class="stories" id="storyList">
+                <p><strong>Jane Doe:</strong> I once got a pet reindeer for Christmas! It was a hilarious surprise.</p>
+                <p><strong>John Smith:</strong> My brother thought he saw Santa... but it was just our neighbor in a red suit!</p>
+            </div>
+        </div>
+
+        <div class="comment-section">
+            <h3>Leave a Comment</h3>
+            <input type="text" id="commentInput" placeholder="Write your comment here...">
+            <button onclick="submitComment()">Submit Comment</button>
+
+            <div class="comments" id="commentList">
+                <h4>Comments:</h4>
+                <p><strong>Emily:</strong> That reindeer story sounds amazing!</p>
+            </div>
+        </div>
+
+        <div class="image-div">
+            <h2>Image</h2>
+           
+            <img src="Buildingblock/picture work.png" alt="Christmas Gift">
+            <p style="font-size: 18px; font-weight: bold;">HAPPY CHRISTMAS</p>
+        </div>
+        
+        
+
+        <p><a href="#home">This is a very funny link anchor!</a></p>
+    </div>
+
+    <script>
+        
+        document.getElementById('loginFormSubmit').addEventListener('submit', function(event) {
+            event.preventDefault(); 
+
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            console.log('Username:', username); 
+            console.log('Password:', password); 
+
+    
+    if (username && password) {
+        console.log("Login Successful!"); 
+    
+        document.getElementById('loginForm').style.display = 'none';
+        document.getElementById('loggedInContent').style.display = 'block';
+    } else {
+        alert("Please enter both username and password.");
+    }
+});
+
+
+        function submitStory() {
+            const storyInput = document.getElementById("storyInput");
+            const storyList = document.getElementById("storyList");
+            
+            if (storyInput.value.trim() !== "") {
+                const newStory = document.createElement("p");
+                newStory.innerHTML = `<strong>You:</strong> ${storyInput.value}`;
+                storyList.appendChild(newStory);
+                storyInput.value = ""; 
+            } else {
+                alert("Please write a story before submitting!");
+            }
+        }
+
+        function submitComment() {
+            const commentInput = document.getElementById("commentInput");
+            const commentList = document.getElementById("commentList");
+            
+            if (commentInput.value.trim() !== "") {
+                const newComment = document.createElement("p");
+                newComment.innerHTML = `<strong>You:</strong> ${commentInput.value}`;
+                commentList.appendChild(newComment);
+                commentInput.value = ""; 
+            } else {
+                alert("Please write a comment before submitting!");
+            }
+        }
+    </script>
+
+</body>
+</html>
