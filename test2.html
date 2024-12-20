@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Christmas Society Website</title>
+    <style>
+        /* Ensure the page takes up full screen height */
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        /* Center frame styles */
+        .login-form, .register-form, .logged-in {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 300px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Input and button styles */
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        input[type="text"], input[type="password"], textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            margin-top: 5px;
+        }
+
+        input[type="submit"], input[type="reset"], button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover, input[type="reset"]:hover, button:hover {
+            background-color: #218838;
+        }
+
+        a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        .story-display, .comment-section {
+            margin-top: 20px;
+        }
+
+        .image-div {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Login Form -->
+<div class="login-form" id="loginForm">
+    <h1>Christmas Society Website</h1>
+    <p><strong>This website allows users to share their Christmas stories!</strong></p>
+
+    <form id="loginFormSubmit">
+        <div class="form-group">
+            <label for="username">Username or Email:</label>
+            <input type="text" id="username" name="username" placeholder="Enter your username or email" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password" placeholder="Enter your password" required>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Login">
+            <input type="reset" value="Clear">
+            <p><a href="#register" onclick="showRegisterForm()">Don't have an account? Register here</a></p>
+        </div>
+    </form>
+</div>
+
+<!-- Register Form -->
+<div class="register-form" id="registerForm" style="display:none;">
+    <h1>Register for the Christmas Society</h1>
+    <form id="registerFormSubmit">
+        <div class="form-group">
+            <label for="newUsername">Username:</label>
+            <input type="text" id="newUsername" name="newUsername" placeholder="Enter a username" required>
+        </div>
+        <div class="form-group">
+            <label for="newPassword">Password:</label>
+            <input type="password" id="newPassword" name="newPassword" placeholder="Enter a password" required>
+        </div>
+        <div class="form-group">
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+        </div>
+        <div class="form-group">
+            <input type="submit" value="Register">
+            <input type="reset" value="Clear">
+        </div>
+    </form>
+    <p><a href="#login" onclick="showLoginForm()">Already have an account? Login here</a></p>
+</div>
+
+<!-- Logged In Content -->
+<div class="logged-in" id="loggedInContent" style="display:none;">
+    <h1>Welcome to the Christmas Society Website!</h1>
+    <h2>Share Your Christmas Story!</h2>
+    <textarea id="storyInput" placeholder="Write your Christmas story here..."></textarea>
+    <button onclick="submitStory()">Submit Your Story</button>
+
+    <div class="story-display">
+        <h3>Other User's Stories:</h3>
+        <div class="stories" id="storyList"></div>
+    </div>
+
+    <div class="comment-section">
+        <h3>Leave a Comment</h3>
+        <input type="text" id="commentInput" placeholder="Write your comment here...">
+        <button onclick="submitComment()">Submit Comment</button>
+
+        <div class="comments" id="commentList">
+            <h4>Comments:</h4>
+        </div>
+    </div>
+
+    <div class="image-div">
+        <h2>Image</h2>
+        <img src="Buildingblock/picture work.png" alt="Christmas Gift">
+        <p style="font-size: 18px; font-weight: bold;">HAPPY CHRISTMAS</p>
+    </div>
+</div>
+
+<script>
+    document.getElementById('loginFormSubmit').addEventListener('submit', function(event) {
+        event.preventDefault(); 
+
+        const username = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        console.log('Username:', username); 
+        console.log('Password:', password); 
+
+        if (username && password) {
+            console.log("Login Successful!"); 
+            document.getElementById('loginForm').style.display = 'none';
+            document.getElementById('loggedInContent').style.display = 'block';
+        } else {
+            alert("Please enter both username and password.");
+        }
+    });
+
+    function submitStory() {
+        const storyInput = document.getElementById("storyInput");
+        const storyList = document.getElementById("storyList");
+
+        if (storyInput.value.trim() !== "") {
+            const newStory = document.createElement("p");
+            newStory.innerHTML = `<strong>You:</strong> ${storyInput.value}`;
+            storyList.appendChild(newStory);
+            storyInput.value = ""; 
+        } else {
+            alert("Please write a story before submitting!");
+        }
+    }
+
+    function submitComment() {
+        const commentInput = document.getElementById("commentInput");
+        const commentList = document.getElementById("commentList");
+
+        if (commentInput.value.trim() !== "") {
+            const newComment = document.createElement("p");
+            newComment.innerHTML = `<strong>You:</strong> ${commentInput.value}`;
+            commentList.appendChild(newComment);
+            commentInput.value = ""; 
+        } else {
+            alert("Please write a comment before submitting!");
+        }
+    }
+
+    function showRegisterForm() {
+        document.getElementById('loginForm').style.display = 'none';
+        document.getElementById('registerForm').style.display = 'block';
+    }
+
+    function showLoginForm() {
+        document.getElementById('registerForm').style.display = 'none';
+        document.getElementById('loginForm').style.display = 'block';
+    }
+
+    document.getElementById('registerFormSubmit').addEventListener('submit', function(event) {
+        event.preventDefault();
+
+        const newPassword = document.getElementById('newPassword').value;
+        const confirmPassword = document.getElementById('confirmPassword').value;
+
+        if (newPassword !== confirmPassword) {
+            alert("Passwords do not match. Please try again.");
+        } else {
+            alert("Registration Successful! You can now log in.");
+            showLoginForm(); 
+        }
+    });
+</script>
+
+</body>
+</html>
